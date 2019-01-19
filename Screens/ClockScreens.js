@@ -20,23 +20,17 @@ function RoundButton({ title, color, background, onPress, disabled}){
 
     )
 }
-
 function ButtonsRow({children}){
     return (
         <View style={styles.buttonsRow}>{children}</View>
     )
 }
-function Row({children}){
-    return (
-        <View style={styles.row}>{children}</View>
-    )
-}
-
-export default class App extends Component{
+export default class ClockScreens extends React.Component{
   constructor(props){
   super(props)
   this.state = {
-    currentTime: moment.duration(10, 'minutes'),
+    totalTime: (60*parseFloat(this.props.challengeClockH)) + parseFloat(this.props.challengeClockM),
+    currentTime: moment.duration(totalTime, 'minutes'),
     pauseTime: moment.duration(0, 'seconds'),
     currentState: 0,
     decrease: 1,
