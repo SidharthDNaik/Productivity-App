@@ -9,6 +9,8 @@ import LoadingScreen from "./Screens/LoadingScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import DashboardScreen from "./Screens/DashboardScreen";
 import Testing from "./Screens/Testing";
+import ChallengeDetailScreens from "./Screens/ChallengeDetailScreens";
+import ClockScreens from "./Screens/ClockScreens";
 import * as firebase from "firebase";
 import { firebaseConfig } from "./config";
 
@@ -20,9 +22,15 @@ export default class App extends React.Component {
   }
 }
 
+const DashboardStack = createStackNavigator({
+  Feed: DashboardScreen,
+  Challenge: ChallengeDetailScreens,
+  ClockScreens: ClockScreens
+});
+
 const MyDrawerNavigator = createDrawerNavigator({
   Feed: {
-    screen: DashboardScreen
+    screen: DashboardStack
   },
   Settings: {
     screen: Testing
