@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import {
   createAppContainer,
   createSwitchNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
+  createStackNavigator
 } from "react-navigation";
 import LoadingScreen from "./Screens/LoadingScreen";
 import LoginScreen from "./Screens/LoginScreen";
@@ -23,8 +24,8 @@ export default class App extends React.Component {
 }
 
 const DashboardStack = createStackNavigator({
-  Feed: DashboardScreen,
-  Challenge: ChallengeDetailScreens,
+  DashboardScreen: DashboardScreen,
+  ChallengeDetailScreens: ChallengeDetailScreens,
   ClockScreens: ClockScreens
 });
 

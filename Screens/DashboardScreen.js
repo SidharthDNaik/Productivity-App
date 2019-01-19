@@ -18,6 +18,9 @@ var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
 
 class DashboardScreen extends Component {
+  static navigationOptions = {
+    header: null
+  };
   render() {
     return (
       <View style={styles.container}>
