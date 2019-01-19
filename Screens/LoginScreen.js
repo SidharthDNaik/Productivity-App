@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
-  Icon
+  Icon,
+  Image
 } from "react-native";
 import firebase from "firebase";
 import { Dimensions } from "react-native";
@@ -110,6 +111,17 @@ class LoginScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text
+          style={{
+            position: "absolute",
+            top: 130,
+            alignItems: "center",
+            fontSize: 50,
+            fontFamily: "AmericanTypewriter-Bold"
+          }}
+        >
+          Productive
+        </Text>
         <TouchableOpacity
           style={{
             borderWidth: 1,
@@ -118,12 +130,18 @@ class LoginScreen extends Component {
             justifyContent: "center",
             width: 200,
             height: 200,
-            backgroundColor: "#fff",
-            borderRadius: 100
+            backgroundColor: "#f5d6db",
+            borderRadius: 100,
+            shadowOffset: { width: 0, height: 8 },
+            shadowColor: "#00614b",
+            shadowOpacity: 1.0
           }}
           onPress={() => this.signInWithGoogleAsync()}
         >
-          <Text>Sign In With Google</Text>
+          <Image
+            source={require("../assets/googleLogo.png")}
+            style={{ width: 125, height: 125 }}
+          />
         </TouchableOpacity>
       </View>
     );
@@ -136,6 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black"
+    backgroundColor: "#00ebb6"
   }
 });
+// #fc0028
