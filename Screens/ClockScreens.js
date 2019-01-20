@@ -15,6 +15,8 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
+import { Header, Left, Right, Icon, Body, Title } from "native-base";
+
 import moment from "moment";
 
 function RoundButton({ title, color, background, onPress, disabled }) {
@@ -31,8 +33,10 @@ function ButtonsRow({ children }) {
   return <View style={styles.buttonsRow}>{children}</View>;
 }
 export default class ClockScreens extends React.Component {
-  state ={
-    totalTime: (60 * parseFloat(this.props.navigation.state.params.challengeClockH)) + (parseFloat(this.props.navigation.state.params.challengeClockM))
+  state = {
+    totalTime:
+      60 * parseFloat(this.props.navigation.state.params.challengeClockH) +
+      parseFloat(this.props.navigation.state.params.challengeClockM)
   };
   constructor(props) {
     super(props);
@@ -131,29 +135,58 @@ export default class ClockScreens extends React.Component {
       currentTime: moment.duration(0, "seconds")
     });
   }
+  static navigationOptions = {
+    header: null
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.timerContainer}>
-          <Text style={styles.timer}>
-            {this.leftPad(this.state.currentTime.get("hours"))}:{" "}
-          </Text>
-          <Text style={styles.timer}>
-            {this.leftPad(this.state.currentTime.get("minutes"))}:{" "}
-          </Text>
-          <Text style={styles.timer}>
-            {this.leftPad(this.state.currentTime.get("seconds"))}{" "}
-          </Text>
+        <Header
+          style={{
+            backgroundColor: "#00ebb6"
+          }}
+        >
+          <Left>
+            <Icon
+              name="ios-arrow-back"
+              onPress={() => this.props.navigation.goBack()}
+              style={{ marginLeft: 10, color: "#00614b" }}
+            />
+          </Left>
+          <Body>
+            <Title style={{ color: "#00614b" }}>Progress</Title>
+          </Body>
+          <Right />
+        </Header>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            backgroundColor: "#fff",
+            paddingHorizontal: 20
+          }}
+        >
+          <View style={styles.timerContainer}>
+            <Text style={styles.timer}>
+              {this.leftPad(this.state.currentTime.get("hours"))}:{" "}
+            </Text>
+            <Text style={styles.timer}>
+              {this.leftPad(this.state.currentTime.get("minutes"))}:{" "}
+            </Text>
+            <Text style={styles.timer}>
+              {this.leftPad(this.state.currentTime.get("seconds"))}{" "}
+            </Text>
+          </View>
         </View>
 
         {this.state.currentState == 0 && (
           <ButtonsRow>
-            <RoundButton title="Pause" color="#50D167" background="#1B361F" />
+            <RoundButton title="Pause" color="#00614b" background="#ff9f00" />
             <RoundButton
               title="Start"
-              color="#50D167"
-              background="#1B361F"
+              color="#00614b"
+              background="#ff9f00"
               onPress={this.start}
             />
           </ButtonsRow>
@@ -162,14 +195,14 @@ export default class ClockScreens extends React.Component {
           <ButtonsRow>
             <RoundButton
               title="Pause"
-              color="#50D167"
-              background="#1B361F"
+              color="#00614b"
+              background="#ff9f00"
               onPress={this.pause}
             />
             <RoundButton
               title="End"
-              color="#D15050"
-              background="#361B1B"
+              color="#00614b"
+              background="#ff9f00"
               onPress={this.end}
             />
           </ButtonsRow>
@@ -178,14 +211,14 @@ export default class ClockScreens extends React.Component {
           <ButtonsRow>
             <RoundButton
               title="Resume"
-              color="#506ED1"
-              background="#1B1F36"
+              color="#00614b"
+              background="#ff9f00"
               onPress={this.resume}
             />
             <RoundButton
               title="End"
-              color="#D15050"
-              background="#361B1B"
+              color="#00614b"
+              background="#ff9f00"
               onPress={this.end}
             />
           </ButtonsRow>
@@ -221,10 +254,7 @@ export default class ClockScreens extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#FFF8E1",
-    paddingTop: 130,
-    paddingHorizontal: 20
+    backgroundColor: "#fff"
   },
   timer: {
     color: "#0D0D0D",
@@ -247,10 +277,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-between",
-    marginTop: 80
+    marginBottom: 300,
+    margin: 20
   },
   timerContainer: {
-    flexDirection: "row"
+    flexDirection: "row",
+    marginTop: 150,
+    alignItems: "center",
+    justifyContent: "center"
   },
   words: {
     fontSize: 20

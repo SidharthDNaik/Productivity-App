@@ -6,12 +6,20 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Picker
+  Picker,
+  Image
 } from "react-native";
+import { Header, Left, Right, Icon, Body, Title } from "native-base";
+import { Dimensions } from "react-native";
+import { LinearGradient } from "expo";
 
-import { Actions } from "react-native-router-flux";
+var width = Dimensions.get("window").width; //full width
+var height = Dimensions.get("window").height; //full height
 
 export default class ChallengeDetailScreens extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
   state = {
     challenger: "",
     challengeType: "",
@@ -30,15 +38,28 @@ export default class ChallengeDetailScreens extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Header
+          style={{
+            backgroundColor: "#00ebb6"
+          }}
+        >
+          <Left>
+            <Icon
+              name="ios-arrow-back"
+              onPress={() => this.props.navigation.goBack()}
+              style={{ marginLeft: 10, color: "#00614b" }}
+            />
+          </Left>
+          <Body>
+            <Title style={{ color: "#00614b" }}>Challenge!</Title>
+          </Body>
+          <Right />
+        </Header>
         <View>
-          <Text style={styles.title}>
-            Enter challenger's email or public for no challenger
-          </Text>
-
           <TextInput
             style={styles.nameInput}
             placeholderTextColor="gray"
-            placeholder="Ex: mingun@example.com"
+            placeholder="Challenger's Name"
             onChangeText={text => {
               this.setState({
                 challenger: text
@@ -46,13 +67,10 @@ export default class ChallengeDetailScreens extends React.Component {
             }}
             value={this.state.challenger}
           />
-
-          <Text style={styles.title}>Enter activity</Text>
-
           <TextInput
             style={styles.nameInput}
             placeholderTextColor="gray"
-            placeholder="Ex: Gym"
+            placeholder="Enter Activity"
             onChangeText={text => {
               this.setState({
                 challengeType: text
@@ -60,13 +78,11 @@ export default class ChallengeDetailScreens extends React.Component {
             }}
             value={this.state.challengeType}
           />
-
-          <Text style={styles.title}>Enter time amount</Text>
-
+          <Text style={styles.title}>Challenge Time</Text>
           <View style={styles.pickerRow}>
             <Picker
               selectedValue={this.state.challengeClockH}
-              style={{ height: 50, width: 125, borderColor: "black" }}
+              style={{ height: 50, width: 125, borderColor: "#ff9f00" }}
               onValueChange={itemValue => this.updateClockH(itemValue)}
             >
               <Picker.Item label="0" value="0" />
@@ -80,17 +96,15 @@ export default class ChallengeDetailScreens extends React.Component {
               <Picker.Item label="8" value="8" />
               <Picker.Item label="9" value="9" />
             </Picker>
-
             <Picker
               selectedValue={this.state.language}
-              style={{ height: 50, width: 50, borderColor: "black" }}
+              style={{ height: 50, width: 60, borderColor: "#ff9f00" }}
             >
-              <Picker.Item label="Hr(s)" value="Hr(s)" />
+              <Picker.Item label="Hours" value="Hr(s)" />
             </Picker>
-
             <Picker
               selectedValue={this.state.challengeClockM}
-              style={{ height: 50, width: 110, borderColor: "black" }}
+              style={{ height: 50, width: 110, borderColor: "#ff9f00" }}
               onValueChange={itemValue => this.updateClockM(itemValue)}
             >
               <Picker.Item label="0" value="0" />
@@ -106,32 +120,53 @@ export default class ChallengeDetailScreens extends React.Component {
               <Picker.Item label="50" value="50" />
               <Picker.Item label="55" value="55" />
             </Picker>
-
             <Picker
               selectedValue={this.state.language}
-              style={{ height: 50, width: 80, borderColor: "black" }}
+              style={{ height: 50, width: 80, borderColor: "#ff9f00" }}
             >
-              <Picker.Item label="Min(s)" value="Min(s)" />
+              <Picker.Item label="Mins" value="Min(s)" />
             </Picker>
           </View>
-
-          <View style={styles.buttonRow}>
-            <TouchableOpacity
-              onPress={() => {
-                // navigate to the second screen, and pass the name of the user
-                this.props.navigation.navigate("ClockScreens", {
-                  challenger: this.state.challenger,
-                  challengeType: this.state.challengeType,
-                  challengeClockH: this.state.challengeClockH,
-                  challengeClockM: this.state.challengeClockM
-                });
-              }}
-              style={styles.buttonContainer}
-            >
-              <Text style={styles.text}>Go!</Text>
-            </TouchableOpacity>
-          </View>
         </View>
+        <TouchableOpacity
+          style={{
+            position: "absolute",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 100,
+            shadowOffset: { width: 0, height: 1 },
+            shadowColor: "#00000",
+            shadowOpacity: 0.7,
+            right: 30,
+            bottom: 30
+          }}
+          onPress={() => {
+            // navigate to the second screen, and pass the name of the user
+            this.props.navigation.navigate("ClockScreens", {
+              challenger: this.state.challenger,
+              challengeType: this.state.challengeType,
+              challengeClockH: this.state.challengeClockH,
+              challengeClockM: this.state.challengeClockM
+            });
+          }}
+        >
+          <LinearGradient
+            colors={["#dd0023", "#f83958"]}
+            style={{
+              padding: 15,
+              borderRadius: 100,
+              width: 100,
+              height: 100,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <Image
+              source={require("../assets/flag.png")}
+              style={{ width: 75, height: 75 }}
+            />
+          </LinearGradient>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -164,11 +199,12 @@ var styles = StyleSheet.create({
   },
 
   title: {
-    marginTop: 20,
-    marginLeft: 20,
-    fontSize: 12,
+    marginTop: 5,
+    fontSize: 25,
     color: "#00614B",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    alignSelf: "center",
+    justifyContent: "center"
   },
 
   nameInput: {
@@ -185,7 +221,7 @@ var styles = StyleSheet.create({
     fontWeight: "bold"
   },
 
-  pickerRow: { flexDirection: "row" },
+  pickerRow: { flexDirection: "row", width: width - 50, alignItems: "center" },
 
   buttonRow: {
     marginTop: 200,
