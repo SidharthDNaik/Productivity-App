@@ -119,7 +119,7 @@ export default class ChallengeDetailScreens extends React.Component {
             <TouchableOpacity
               onPress={() => {
                 // navigate to the second screen, and pass the name of the user
-                Actions.clockScreens({
+                this.props.navigation.navigate("ClockScreens", {
                   challenger: this.state.challenger,
                   challengeType: this.state.challengeType,
                   challengeClockH: this.state.challengeClockH,
