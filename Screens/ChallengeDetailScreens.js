@@ -108,6 +108,7 @@ export default class ChallengeDetailScreens extends React.Component {
               onValueChange={itemValue => this.updateClockM(itemValue)}
             >
               <Picker.Item label="0" value="0" />
+              <Picker.Item label="1" value="1" />
               <Picker.Item label="5" value="5" />
               <Picker.Item label="10" value="10" />
               <Picker.Item label="15" value="15" />

@@ -32,6 +32,7 @@ function RoundButton({ title, color, background, onPress, disabled }) {
 function ButtonsRow({ children }) {
   return <View style={styles.buttonsRow}>{children}</View>;
 }
+
 export default class ClockScreens extends React.Component {
   state = {
     totalTime:
@@ -43,14 +44,18 @@ export default class ClockScreens extends React.Component {
     this.state = {
       currentTime: moment.duration(this.state.totalTime, "minutes"),
       pauseTime: moment.duration(0, "seconds"),
+      timePassed: moment.duration(0, "seconds"),
       currentState: 0,
       decrease: 1,
       timer: null,
-      timer2: null
+      timer2: null,
+      timer3: null,
+      num: 1
     };
     this.reduce = this.reduce.bind(this);
     this.pause = this.pause.bind(this);
     this.increase = this.increase.bind(this);
+    this.up = this.up.bind(this);
   }
 
   leftPad = val => {
@@ -63,9 +68,19 @@ export default class ClockScreens extends React.Component {
     this.setState({
       decrease: 1,
       currentState: 1,
-      timer: setInterval(this.reduce, 1000)
+      timer: setInterval(this.reduce, 1000),
+      timer3: setInterval(this.up, 1000)
     });
   };
+
+  up() {
+    const tempTime2 = moment.duration(this.state.timePassed);
+    tempTime2.add(this.state.decrease, "seconds");
+
+    this.setState({
+      timePassed: tempTime2
+    });
+  }
 
   reduce() {
     if (
@@ -73,6 +88,7 @@ export default class ClockScreens extends React.Component {
       this.state.currentTime.get("minutes") == 0 &&
       this.state.currentTime.get("seconds") == 0
     ) {
+      Alert.alert("Time is up!", "Great Job!");
       this.done();
       return;
     }
@@ -86,24 +102,33 @@ export default class ClockScreens extends React.Component {
   }
 
   pause = () => {
+    Alert.alert(
+      "Warning: ",
+      "You can only pause once.",
+      [{ text: "Pause", onPress: () => this.paused() }, { text: "Nevermind" }],
+      { cancelable: false }
+    );
+  };
+
+  paused() {
     this.setState({
       currentState: 2,
       decrease: 0,
       timer2: setInterval(this.increase, 1000)
     });
-  };
+  }
 
   increase() {
     const addTime = moment.duration(this.state.pauseTime);
-    addTime.add(1, "seconds");
+    addTime.add(this.state.num, "seconds");
     this.setState({
       pauseTime: addTime
     });
 
-    if (this.state.pauseTime.get("seconds") == 3) {
+    if (this.state.pauseTime.get("minutes") == 3) {
       Alert.alert("Are you here?", "Make sure not to get distracted!");
     }
-    if (this.state.pauseTime.get("seconds") == 5) {
+    if (this.state.pauseTime.get("minutes") == 5) {
       Alert.alert("Hey,", "Comeback!");
     }
   }
@@ -119,9 +144,9 @@ export default class ClockScreens extends React.Component {
 
   resume = () => {
     this.setState({
-      currentState: 1,
+      currentState: 4,
       decrease: 1,
-      pauseTime: moment.duration(0, "seconds")
+      num: 0
     });
   };
 
@@ -132,6 +157,7 @@ export default class ClockScreens extends React.Component {
 
     this.setState({
       currentState: 3,
+      decrease: 0,
       currentTime: moment.duration(0, "seconds")
     });
   }
@@ -245,7 +271,33 @@ export default class ClockScreens extends React.Component {
           </View>
         )}
 
-        {this.state.currentState == 3 && <Text>{"Done!"}</Text>}
+        {this.state.currentState == 3 && (
+          <View>
+            <Text>{"You ended early\n"}</Text>
+            <View style={styles.row}>
+              <Text style={{ fontSize: 20 }}>{"You worked for: "}</Text>
+              <Text style={styles.words}>
+                {this.leftPad(this.state.timePassed.get("hours"))}:{" "}
+              </Text>
+              <Text style={styles.words}>
+                {this.leftPad(this.state.timePassed.get("minutes"))}:{" "}
+              </Text>
+              <Text style={styles.words}>
+                {this.leftPad(this.state.timePassed.get("seconds"))}{" "}
+              </Text>
+            </View>
+          </View>
+        )}
+        {this.state.currentState == 4 && (
+          <ButtonsRow>
+            <RoundButton
+              title="End"
+              color="#00614b"
+              background="#ff9f00"
+              onPress={this.end}
+            />
+          </ButtonsRow>
+        )}
       </View>
     );
   }
@@ -272,6 +324,10 @@ const styles = StyleSheet.create({
   buttonTitle: {
     fontSize: 18
   },
+  oneButtonRow: {
+    marginBottom: 300,
+    alignItems: "center"
+  },
 
   buttonsRow: {
     flexDirection: "row",
@@ -291,11 +347,11 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    marginTop: 30,
-    alignSelf: "center"
+    alignSelf: "center",
+    marginTop: -60
   },
 
   row2: {
-    marginTop: 20
+    marginTop: 10
   }
 });
