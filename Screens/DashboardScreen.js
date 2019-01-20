@@ -49,51 +49,51 @@ class DashboardScreen extends Component {
               {
                 key: "a",
                 name: "Kartikeya",
-                activity: "Gym",
-                time: "60 minutes",
-                date: "1/19/19"
+                activity: "Study for math quiz",
+                time: "80 minutes",
+                date: "Yesterday"
               },
               {
                 key: "b",
                 name: "Sid",
                 activity: "Gym",
                 time: "60 minutes",
-                date: "1/19/19"
+                date: "Yesterday"
               },
               {
                 key: "c",
-                name: "Sid",
-                activity: "Gym",
-                time: "60 minutes",
-                date: "1/19/19"
+                name: "Mingun",
+                activity: "Programming for CE12",
+                time: "90 minutes",
+                date: "Two days ago"
               },
               {
                 key: "d",
                 name: "Sid",
-                activity: "Gym",
-                time: "60 minutes",
-                date: "1/19/19"
+                activity: "Tightrope walking",
+                time: "20 minutes",
+                date: "January 13, 2018"
               },
               {
                 key: "e",
                 name: "Sid",
                 activity: "Gym",
                 time: "60 minutes",
-                date: "1/19/19"
+                date: "January 12, 2018"
               },
               {
                 key: "f",
-                name: "Sid",
-                activity: "Gym",
+                name: "Ben",
+                activity: "Paper airplane design",
                 time: "60 minutes",
-                date: "1/19/19"
+                date: "January 12, 2018"
               },
               {
                 key: "g",
-                name: "Sid",
-                activity: "Gym",
+                name: "Ben",
+                activity: "Planting trees",
                 time: "60 minutes",
-                date: "1/19/19"
+                date: "January 11, 2018"
               }
             ]}
             renderItem={({ item }) => (
