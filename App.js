@@ -1,15 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  Dimensions,
+  Button
+} from "react-native";
 import {
   createAppContainer,
   createSwitchNavigator,
   createDrawerNavigator,
-  createStackNavigator
+  createStackNavigator,
+  DrawerItems
 } from "react-navigation";
 import LoadingScreen from "./Screens/LoadingScreen";
 import LoginScreen from "./Screens/LoginScreen";
 import DashboardScreen from "./Screens/DashboardScreen";
-import Testing from "./Screens/Testing";
+import Chat from "./Screens/Chat";
+import Profile from "./Screens/Profile";
 import ChallengeDetailScreens from "./Screens/ChallengeDetailScreens";
 import ClockScreens from "./Screens/ClockScreens";
 import * as firebase from "firebase";
@@ -29,14 +40,38 @@ const DashboardStack = createStackNavigator({
   ClockScreens: ClockScreens
 });
 
-const MyDrawerNavigator = createDrawerNavigator({
-  Feed: {
-    screen: DashboardStack
+const CustomDrawerNav = props => (
+  <SafeAreaView style={{ flex: 1 }}>
+    <View
+      style={{
+        height: 150,
+        backgroundColor: "white",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <Image
+        source={require("./assets/ProductivityAppLogo.png")}
+        style={{ width: 120, height: 120, borderRadius: 30 }}
+      />
+    </View>
+    <ScrollView>
+      <DrawerItems {...props} />
+      <Button title="Sign Out" onPress={() => firebase.auth().signOut()} />
+    </ScrollView>
+  </SafeAreaView>
+);
+
+const MyDrawerNavigator = createDrawerNavigator(
+  {
+    Feed: DashboardStack,
+    Chat: Chat,
+    Profile: Profile
   },
-  Settings: {
-    screen: Testing
+  {
+    contentComponent: CustomDrawerNav
   }
-});
+);
 const AppSwitchNavigator = createSwitchNavigator({
   LoadingScreen: LoadingScreen,
   LoginScreen: LoginScreen,

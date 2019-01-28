@@ -97,7 +97,7 @@ class DashboardScreen extends Component {
               }
             ]}
             renderItem={({ item }) => (
-              <TouchableOpacity
+              <View
                 style={{
                   width: width - 10,
                   height: 100,
@@ -117,12 +117,49 @@ class DashboardScreen extends Component {
                     width: width - 10
                   }}
                 >
-                  <Text>{item.name}</Text>
-                  <Text>{item.activity}</Text>
-                  <Text>{item.time}</Text>
-                  <Text>{item.date}</Text>
+                  <View
+                    style={{
+                      flexDirection: "row"
+                    }}
+                  >
+                    <View>
+                      <Text>{item.name}</Text>
+                      <Text>{item.activity}</Text>
+                      <Text>{item.time}</Text>
+                      <Text>{item.date}</Text>
+                    </View>
+                    <TouchableOpacity
+                      style={{
+                        alignContent: "flex-end",
+                        borderRadius: 100,
+                        shadowOffset: { width: 0, height: 1 },
+                        shadowColor: "#00000",
+                        shadowOpacity: 0.7
+                      }}
+                      onPress={() =>
+                        this.props.navigation.navigate("ChallengeDetailScreens")
+                      }
+                    >
+                      <LinearGradient
+                        colors={["#dd0023", "#f83958"]}
+                        style={{
+                          padding: 15,
+                          borderRadius: 100,
+                          width: 50,
+                          height: 50,
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <Image
+                          source={require("../assets/flag.png")}
+                          style={{ width: 25, height: 25 }}
+                        />
+                      </LinearGradient>
+                    </TouchableOpacity>
+                  </View>
                 </LinearGradient>
-              </TouchableOpacity>
+              </View>
             )}
           />
           <TouchableOpacity

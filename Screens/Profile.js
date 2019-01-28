@@ -6,42 +6,33 @@ import { Dimensions } from "react-native";
 
 var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
-import firebase from "firebase";
 
-class Testing extends Component {
+class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header>
+        <Header
+          style={{
+            backgroundColor: "#00ebb6"
+          }}
+        >
           <Left>
             <Icon
-              name="ios-menu"
+              name="md-menu"
               onPress={() => this.props.navigation.openDrawer()}
+              style={{ marginLeft: 10, color: "#00614b" }}
             />
           </Left>
           <Body>
-            <Title>Settings</Title>
+            <Title style={{ color: "#00614b" }}>Profile</Title>
           </Body>
           <Right />
         </Header>
-        <View style={{ backgroundColor: "#00ebb6", flex: 1 }}>
-          <LinearGradient
-            colors={["#a5bdb8", "#009775"]}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: 0,
-              height: height
-            }}
-          />
-          <Button title="Sign Out" onPress={() => firebase.auth().signOut()} />
-        </View>
       </View>
     );
   }
 }
-export default Testing;
+export default Profile;
 
 const styles = StyleSheet.create({
   container: {
