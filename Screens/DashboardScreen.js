@@ -19,7 +19,10 @@ var height = Dimensions.get("window").height; //full height
 
 class DashboardScreen extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    drawerIcon: ({ tintColor }) => (
+      <Icon name="home" style={{ fontSize: 24, color: tintColor }} />
+    )
   };
   render() {
     return (

@@ -64,12 +64,15 @@ const CustomDrawerNav = props => (
 
 const MyDrawerNavigator = createDrawerNavigator(
   {
-    Feed: DashboardStack,
+    Home: DashboardStack,
     Chat: Chat,
     Profile: Profile
   },
   {
-    contentComponent: CustomDrawerNav
+    contentComponent: CustomDrawerNav,
+    contentOptions: {
+      activeTintColor: "#00ebb6"
+    }
   }
 );
 const AppSwitchNavigator = createSwitchNavigator({

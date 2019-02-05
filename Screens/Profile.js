@@ -8,6 +8,12 @@ var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
 
 class Profile extends Component {
+  static navigationOptions = {
+    header: null,
+    drawerIcon: ({ tintColor }) => (
+      <Icon name="ios-person" style={{ fontSize: 24, color: tintColor }} />
+    )
+  };
   render() {
     return (
       <View style={styles.container}>
