@@ -12,6 +12,7 @@ import {
 import { Header, Left, Right, Icon, Body, Title } from "native-base";
 import { Dimensions } from "react-native";
 import { LinearGradient } from "expo";
+import firebase from "firebase";
 
 var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
@@ -26,7 +27,7 @@ export default class ChallengeDetailScreens extends React.Component {
     challengeClockH: "0",
     challengeClockM: "0"
   };
-
+  user = firebase.auth().currentUser;
   updateClockH = challengeClockH => {
     this.setState({ challengeClockH: challengeClockH });
   };
@@ -34,6 +35,24 @@ export default class ChallengeDetailScreens extends React.Component {
   updateClockM = challengeClockM => {
     this.setState({ challengeClockM: challengeClockM });
   };
+  addChallenge() {
+    var key = firebase
+      .database()
+      .ref("/feed")
+      .push().key;
+    firebase
+      .database()
+      .ref("/feed")
+      .child(key)
+      .set({
+        challenger: this.state.challenger,
+        challengeType: this.state.challengeType,
+        first_name: this.user.displayName,
+        timeHours: this.state.challengeClockH,
+        timeMinutes: this.state.challengeClockM,
+        created_at: Date.now()
+      });
+  }
 
   render() {
     return (
@@ -143,6 +162,7 @@ export default class ChallengeDetailScreens extends React.Component {
           }}
           onPress={() => {
             // navigate to the second screen, and pass the name of the user
+            this.addChallenge();
             this.props.navigation.navigate("ClockScreens", {
               challenger: this.state.challenger,
               challengeType: this.state.challengeType,
