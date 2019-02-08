@@ -9,6 +9,7 @@ import {
   Dimensions,
   Button
 } from "react-native";
+import { Icon } from "native-base";
 import {
   createAppContainer,
   createSwitchNavigator,
@@ -64,7 +65,14 @@ const CustomDrawerNav = props => (
 
 const MyDrawerNavigator = createDrawerNavigator(
   {
-    Home: DashboardStack,
+    Home: {
+      screen: DashboardStack,
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="ios-home" style={{ fontSize: 24, color: tintColor }} />
+        )
+      }
+    },
     Chat: Chat,
     Profile: Profile
   },

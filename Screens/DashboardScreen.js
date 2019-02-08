@@ -21,10 +21,7 @@ var data = [];
 
 class DashboardScreen extends Component {
   static navigationOptions = {
-    header: null,
-    drawerIcon: ({ tintColor }) => (
-      <Icon name="home" style={{ fontSize: 24, color: tintColor }} />
-    )
+    header: null
   };
   constructor(props) {
     super(props);
@@ -36,11 +33,11 @@ class DashboardScreen extends Component {
     var that = this;
     firebase
       .database()
-      .ref("/feed/")
+      .ref("/feed")
       .on("child_added", function(data) {
         var newData = [...that.state.listViewData];
         newData.push(data);
-        that.setState({ listViewData: newData });
+        that.setState({ listViewData: newData.reverse() });
       });
   }
   emptyList() {
