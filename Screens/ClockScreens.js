@@ -16,6 +16,7 @@ import {
   Alert
 } from "react-native";
 import { Header, Left, Right, Icon, Body, Title } from "native-base";
+import firebase from "firebase";
 
 import moment from "moment";
 
@@ -37,7 +38,8 @@ export default class ClockScreens extends React.Component {
   state = {
     totalTime:
       60 * parseFloat(this.props.navigation.state.params.challengeClockH) +
-      parseFloat(this.props.navigation.state.params.challengeClockM)
+      parseFloat(this.props.navigation.state.params.challengeClockM),
+    challengeKey: this.props.navigation.state.params.challengeKey
   };
   constructor(props) {
     super(props);

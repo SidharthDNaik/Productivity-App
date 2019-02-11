@@ -25,7 +25,8 @@ export default class ChallengeDetailScreens extends React.Component {
     challenger: "",
     challengeType: "",
     challengeClockH: "0",
-    challengeClockM: "0"
+    challengeClockM: "0",
+    challengeKey: ""
   };
   user = firebase.auth().currentUser;
   updateClockH = challengeClockH => {
@@ -38,11 +39,11 @@ export default class ChallengeDetailScreens extends React.Component {
   addChallenge() {
     var key = firebase
       .database()
-      .ref("/feed")
+      .ref("/feed/")
       .push().key;
     firebase
       .database()
-      .ref("/feed")
+      .ref("/feed/")
       .child(key)
       .set({
         challenger: this.state.challenger,
@@ -52,6 +53,9 @@ export default class ChallengeDetailScreens extends React.Component {
         timeMinutes: this.state.challengeClockM,
         created_at: Date.now()
       });
+    this.setState({
+      challengeKey: key
+    });
   }
 
   render() {
@@ -167,7 +171,8 @@ export default class ChallengeDetailScreens extends React.Component {
               challenger: this.state.challenger,
               challengeType: this.state.challengeType,
               challengeClockH: this.state.challengeClockH,
-              challengeClockM: this.state.challengeClockM
+              challengeClockM: this.state.challengeClockM,
+              challengeKey: this.state.challengeKey
             });
           }}
         >
