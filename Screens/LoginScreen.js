@@ -8,6 +8,7 @@ import {
   Icon,
   Image
 } from "react-native";
+import { Right, Left, Body } from "native-base";
 import firebase from "firebase";
 import { Dimensions } from "react-native";
 
@@ -113,35 +114,39 @@ class LoginScreen extends Component {
       <View style={styles.container}>
         <Text
           style={{
-            position: "absolute",
-            top: 130,
             alignItems: "center",
             fontSize: 50,
-            fontFamily: "AmericanTypewriter-Bold"
+            bottom: 100
           }}
         >
-          Productive
+          efficiens
         </Text>
+
         <TouchableOpacity
           style={{
             borderWidth: 1,
             borderColor: "rgba(0,0,0,0.2)",
             alignItems: "center",
             justifyContent: "center",
-            width: 200,
-            height: 200,
-            backgroundColor: "#f5d6db",
-            borderRadius: 100,
-            shadowOffset: { width: 0, height: 8 },
-            shadowColor: "#00614b",
-            shadowOpacity: 1.0
+            width: 240,
+            height: 48,
+            backgroundColor: "white",
+            borderRadius: 10,
+            shadowOffset: { width: 0, height: 4 },
+            shadowColor: "grey",
+            shadowOpacity: 1.0,
+            flexDirection: "row"
           }}
           onPress={() => this.signInWithGoogleAsync()}
         >
           <Image
             source={require("../assets/googleLogo.png")}
-            style={{ width: 125, height: 125 }}
+            style={{ width: 30, height: 30 }}
           />
+          <Text style={{ fontSize: 15, color: "grey" }}>
+            {" "}
+            Login with Google
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -154,7 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#00ebb6"
+    backgroundColor: "white"
   }
 });
 // #fc0028
