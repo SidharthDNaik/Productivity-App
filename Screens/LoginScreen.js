@@ -119,7 +119,7 @@ class LoginScreen extends Component {
             bottom: 100
           }}
         >
-          efficiens
+          Productive
         </Text>
 
         <TouchableOpacity
