@@ -74,7 +74,31 @@ export default class ClockScreens extends React.Component {
       timer3: setInterval(this.up, 1000)
     });
   };
-
+  updateChallenge() {
+    var key = firebase
+      .database()
+      .ref("/feed/")
+      .push().key;
+    firebase
+      .database()
+      .ref("/feed/")
+      .child(key)
+      .set({
+        challenger: this.props.navigation.state.params.challenger,
+        challengeType: this.props.navigation.state.params.challengeType,
+        first_name: this.props.navigation.state.params.first_name,
+        timeHours: this.state.timePassed.get("hours"),
+        timeMinutes: this.state.timePassed.get("minutes"),
+        timeSeconds: this.state.timePassed.get("seconds"),
+        created_at: Date.now()
+      });
+  }
+  deleteChallenge() {
+    firebase
+      .database()
+      .ref("/feed/" + this.props.navigation.state.params.challengeKey)
+      .remove();
+  }
   up() {
     const tempTime2 = moment.duration(this.state.timePassed);
     tempTime2.add(this.state.decrease, "seconds");
@@ -156,12 +180,28 @@ export default class ClockScreens extends React.Component {
     if (this.state.timer) {
       clearInterval(this.state.timer);
     }
-
     this.setState({
       currentState: 3,
       decrease: 0,
       currentTime: moment.duration(0, "seconds")
     });
+    var key = firebase
+      .database()
+      .ref("/feed/")
+      .push().key;
+    firebase
+      .database()
+      .ref("/feed/")
+      .child(key)
+      .set({
+        challenger: this.props.navigation.state.params.challenger,
+        challengeType: this.props.navigation.state.params.challengeType,
+        first_name: this.props.navigation.state.params.first_name,
+        timeHours: this.state.timePassed.get("hours"),
+        timeMinutes: this.state.timePassed.get("minutes"),
+        timeSeconds: this.state.timePassed.get("seconds"),
+        created_at: Date.now()
+      });
   }
   static navigationOptions = {
     header: null

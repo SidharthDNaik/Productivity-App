@@ -36,27 +36,6 @@ export default class ChallengeDetailScreens extends React.Component {
   updateClockM = challengeClockM => {
     this.setState({ challengeClockM: challengeClockM });
   };
-  addChallenge() {
-    var key = firebase
-      .database()
-      .ref("/feed/")
-      .push().key;
-    firebase
-      .database()
-      .ref("/feed/")
-      .child(key)
-      .set({
-        challenger: this.state.challenger,
-        challengeType: this.state.challengeType,
-        first_name: this.user.displayName,
-        timeHours: this.state.challengeClockH,
-        timeMinutes: this.state.challengeClockM,
-        created_at: Date.now()
-      });
-    this.setState({
-      challengeKey: key
-    });
-  }
 
   render() {
     return (
@@ -166,13 +145,13 @@ export default class ChallengeDetailScreens extends React.Component {
           }}
           onPress={() => {
             // navigate to the second screen, and pass the name of the user
-            this.addChallenge();
             this.props.navigation.navigate("ClockScreens", {
               challenger: this.state.challenger,
               challengeType: this.state.challengeType,
               challengeClockH: this.state.challengeClockH,
               challengeClockM: this.state.challengeClockM,
-              challengeKey: this.state.challengeKey
+              challengeKey: this.state.challengeKey,
+              first_name: this.user.displayName
             });
           }}
         >
