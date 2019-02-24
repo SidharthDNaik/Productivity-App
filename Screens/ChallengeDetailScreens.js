@@ -26,6 +26,7 @@ export default class ChallengeDetailScreens extends React.Component {
     challengeType: "",
     challengeClockH: "0",
     challengeClockM: "0",
+    challengeClockS: "0",
     challengeKey: ""
   };
   user = firebase.auth().currentUser;
@@ -42,18 +43,18 @@ export default class ChallengeDetailScreens extends React.Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#00ebb6"
+            backgroundColor: "#581845"
           }}
         >
           <Left>
             <Icon
               name="ios-arrow-back"
               onPress={() => this.props.navigation.goBack()}
-              style={{ marginLeft: 10, color: "#00614b" }}
+              style={{ marginLeft: 10, color: "#FFC30F" }}
             />
           </Left>
           <Body>
-            <Title style={{ color: "#00614b" }}>Challenge!</Title>
+            <Title style={{ color: "#FFC30F" }}>Challenge!</Title>
           </Body>
           <Right />
         </Header>
@@ -84,7 +85,7 @@ export default class ChallengeDetailScreens extends React.Component {
           <View style={styles.pickerRow}>
             <Picker
               selectedValue={this.state.challengeClockH}
-              style={{ height: 50, width: 125, borderColor: "#ff9f00" }}
+              style={{ height: 50, width: 125, borderColor: "#581845" }}
               onValueChange={itemValue => this.updateClockH(itemValue)}
             >
               <Picker.Item label="0" value="0" />
@@ -100,13 +101,13 @@ export default class ChallengeDetailScreens extends React.Component {
             </Picker>
             <Picker
               selectedValue={this.state.language}
-              style={{ height: 50, width: 60, borderColor: "#ff9f00" }}
+              style={{ height: 50, width: 60, borderColor: "#581845" }}
             >
               <Picker.Item label="Hours" value="Hr(s)" />
             </Picker>
             <Picker
               selectedValue={this.state.challengeClockM}
-              style={{ height: 50, width: 110, borderColor: "#ff9f00" }}
+              style={{ height: 50, width: 110, borderColor: "#581845" }}
               onValueChange={itemValue => this.updateClockM(itemValue)}
             >
               <Picker.Item label="0" value="0" />
@@ -125,7 +126,7 @@ export default class ChallengeDetailScreens extends React.Component {
             </Picker>
             <Picker
               selectedValue={this.state.language}
-              style={{ height: 50, width: 80, borderColor: "#ff9f00" }}
+              style={{ height: 50, width: 80, borderColor: "#581845" }}
             >
               <Picker.Item label="Mins" value="Min(s)" />
             </Picker>
@@ -150,13 +151,14 @@ export default class ChallengeDetailScreens extends React.Component {
               challengeType: this.state.challengeType,
               challengeClockH: this.state.challengeClockH,
               challengeClockM: this.state.challengeClockM,
+              challengeClockS: this.state.challengeClockS,
               challengeKey: this.state.challengeKey,
               first_name: this.user.displayName
             });
           }}
         >
           <LinearGradient
-            colors={["#dd0023", "#f83958"]}
+            colors={["#ff9f00", "#f83958"]}
             style={{
               padding: 15,
               borderRadius: 100,
@@ -200,13 +202,13 @@ var styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#009688"
+    backgroundColor: "#581845"
   },
 
   title: {
     marginTop: 5,
     fontSize: 25,
-    color: "#00614B",
+    color: "#FFC30F",
     fontWeight: "bold",
     alignSelf: "center",
     justifyContent: "center"

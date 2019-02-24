@@ -31,31 +31,33 @@ class Chat extends Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#00ebb6"
+            backgroundColor: "#581845"
           }}
         >
           <Left>
             <Icon
               name="md-menu"
               onPress={() => this.props.navigation.openDrawer()}
-              style={{ marginLeft: 10, color: "#00614b" }}
+              style={{ marginLeft: 10, color: "#FFC30F" }}
             />
           </Left>
           <Body>
-            <Title style={{ color: "#00614b" }}>Chat</Title>
+            <Title style={{ color: "#FFC30F" }}>Chat</Title>
           </Body>
           <Right />
         </Header>
-          <GiftedChat
-              messages={this.state.messages}
-              onSend={(message) => {
+          <View style={styles.yawYeet}>
+            <GiftedChat
+                messages={this.state.messages}
+                onSend={(message) => {
                   chatBackend.sendMessage(message);
-              }}
-              user={{
-                _id: this.user.uid,
-                name: this.user.displayName,
-              }}
-          />
+                }}
+                user={{
+                  _id: this.user.uid,
+                  name: this.user.displayName,
+                }}
+            />
+          </View>
       </View>
     );
   }
@@ -78,6 +80,9 @@ export default Chat;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  yawYeet: {
     flex: 1
   }
 });

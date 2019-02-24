@@ -31,6 +31,7 @@ class DashboardScreen extends Component {
     challengeType: "",
     challengeClockH: 1,
     challengeClockM: 0,
+    challengeClockS: 0,
     challengeKey: ""
   };
 
@@ -63,18 +64,18 @@ class DashboardScreen extends Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#00ebb6"
+            backgroundColor: "#581845"
           }}
         >
           <Left>
             <Icon
               name="md-menu"
               onPress={() => this.props.navigation.openDrawer()}
-              style={{ marginLeft: 10, color: "#00614b" }}
+              style={{ marginLeft: 10, color: "#FFC30F" }}
             />
           </Left>
           <Body>
-            <Title style={{ color: "#00614b" }}>Activity Feed</Title>
+            <Title style={{ color: "#FFC30F" }}>Activity Feed</Title>
           </Body>
           <Right />
         </Header>
@@ -89,7 +90,7 @@ class DashboardScreen extends Component {
                 style={{
                   width: width - 10,
                   height: 75,
-                  backgroundColor: "#ffb53b",
+                  backgroundColor: "#FFC30F",
                   marginTop: 10,
                   alignItems: "flex-start",
                   justifyContent: "center",
@@ -141,6 +142,7 @@ class DashboardScreen extends Component {
                           challengeType: item.val().challengeType,
                           challengeClockH: item.val().timeHours,
                           challengeClockM: item.val().timeMinutes,
+                          challengeClockS: item.val().timeSeconds,
                           challengeKey: item.val().challengeKey
                         },
                         function() {
@@ -149,6 +151,7 @@ class DashboardScreen extends Component {
                             challengeType: this.state.challengeType,
                             challengeClockH: this.state.challengeClockH,
                             challengeClockM: this.state.challengeClockM,
+                            challengeClockS: this.state.challengeClockS,
                             challengeKey: this.state.challengeKey,
                             first_name: this.user.displayName
                           });
@@ -157,7 +160,7 @@ class DashboardScreen extends Component {
                     }}
                   >
                     <LinearGradient
-                      colors={["#dd0023", "#ffb53b"]}
+                      colors={["#FFC30F", "#581845"]}
                       style={{
                         padding: 15,
                         borderRadius: 75,
@@ -194,19 +197,19 @@ class DashboardScreen extends Component {
             }
           >
             <LinearGradient
-              colors={["#dd0023", "#dd0023"]}
+                colors={["#ff9f00", "#f83958"]}
               style={{
                 padding: 15,
                 borderRadius: 100,
-                width: 75,
-                height: 75,
+                width: 100,
+                height: 100,
                 alignItems: "center",
                 justifyContent: "center"
               }}
             >
               <Image
                 source={require("../assets/flag.png")}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 75, height: 75 }}
               />
             </LinearGradient>
           </TouchableOpacity>

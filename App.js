@@ -79,7 +79,7 @@ const MyDrawerNavigator = createDrawerNavigator(
   {
     contentComponent: CustomDrawerNav,
     contentOptions: {
-      activeTintColor: "#00ebb6"
+      activeTintColor: "#FFC30F"
     }
   }
 );

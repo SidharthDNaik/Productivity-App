@@ -38,7 +38,7 @@ export default class ClockScreens extends React.Component {
   state = {
     totalTime:
       60 * parseFloat(this.props.navigation.state.params.challengeClockH) +
-      parseFloat(this.props.navigation.state.params.challengeClockM),
+      parseFloat(this.props.navigation.state.params.challengeClockM) + (parseFloat(this.props.navigation.state.params.challengeClockS)/60),
     challengeKey: this.props.navigation.state.params.challengeKey
   };
   constructor(props) {
@@ -212,18 +212,19 @@ export default class ClockScreens extends React.Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#00ebb6"
+            backgroundColor: "#581845"
           }}
         >
           <Left>
             <Icon
               name="ios-arrow-back"
-              onPress={() => this.props.navigation.goBack()}
-              style={{ marginLeft: 10, color: "#00614b" }}
+              onPress={() => this.props.navigation.navigate("DashboardScreen")}
+              style={{ marginLeft: 10, color: "#FFC30F" }}
             />
           </Left>
+
           <Body>
-            <Title style={{ color: "#00614b" }}>Progress</Title>
+            <Title style={{ color: "#FFC30F" }}>Progress</Title>
           </Body>
           <Right />
         </Header>
@@ -250,11 +251,11 @@ export default class ClockScreens extends React.Component {
 
         {this.state.currentState == 0 && (
           <ButtonsRow>
-            <RoundButton title="Pause" color="#00614b" background="#ff9f00" />
+            <RoundButton title="Pause" color="#FFC30F" background="#581845" />
             <RoundButton
               title="Start"
-              color="#00614b"
-              background="#ff9f00"
+              color="#FFC30F"
+              background="#581845"
               onPress={this.start}
             />
           </ButtonsRow>
@@ -263,14 +264,14 @@ export default class ClockScreens extends React.Component {
           <ButtonsRow>
             <RoundButton
               title="Pause"
-              color="#00614b"
-              background="#ff9f00"
+              color="#FFC30F"
+              background="#581845"
               onPress={this.pause}
             />
             <RoundButton
               title="End"
-              color="#00614b"
-              background="#ff9f00"
+              color="#FFC30F"
+              background="#581845"
               onPress={this.end}
             />
           </ButtonsRow>
@@ -279,14 +280,14 @@ export default class ClockScreens extends React.Component {
           <ButtonsRow>
             <RoundButton
               title="Resume"
-              color="#00614b"
-              background="#ff9f00"
+              color="#FFC30F"
+              background="#581845"
               onPress={this.resume}
             />
             <RoundButton
               title="End"
-              color="#00614b"
-              background="#ff9f00"
+              color="#FFC30F"
+              background="#581845"
               onPress={this.end}
             />
           </ButtonsRow>
@@ -334,7 +335,7 @@ export default class ClockScreens extends React.Component {
           <ButtonsRow>
             <RoundButton
               title="End"
-              color="#00614b"
+              color="#FFC30F"
               background="#ff9f00"
               onPress={this.end}
             />

@@ -57,18 +57,18 @@ class Profile extends Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#00ebb6"
+            backgroundColor: "#581845"
           }}
         >
           <Left>
             <Icon
               name="md-menu"
               onPress={() => this.props.navigation.openDrawer()}
-              style={{ marginLeft: 10, color: "#00614b" }}
+              style={{ marginLeft: 10, color: "#FFC30F" }}
             />
           </Left>
           <Body>
-            <Title style={{ color: "#00614b" }}>Profile</Title>
+            <Title style={{ color: "#FFC30F" }}>Profile</Title>
           </Body>
           <Right />
         </Header>
@@ -81,7 +81,7 @@ class Profile extends Component {
               paddingBottom: 10
             }}
           >
-            <UserAvatar size="75" name={this.state.name} color="#00ebb6" />
+            <UserAvatar size="75" name={this.state.name} color="#FFC30F" />
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>
               {this.state.name}
             </Text>
@@ -120,7 +120,7 @@ class Profile extends Component {
                   this.props.navigation.navigate("DashboardScreen");
                 }}
               >
-                <Text style={{ fontSize: 20, padding: 10, color: "#00ebb6" }}>
+                <Text style={{ fontSize: 20, padding: 10, color: "#FFC30F" }}>
                   Go to Feed
                 </Text>
               </TouchableOpacity>
@@ -141,13 +141,13 @@ const styles = StyleSheet.create({
     height: 0.3,
     width: "90%",
     alignSelf: "center",
-    backgroundColor: "#555"
+    backgroundColor: "#581845"
   },
   separator2: {
     height: 0.3,
     width: "100%",
     alignSelf: "center",
-    backgroundColor: "#555"
+    backgroundColor: "#581845"
   },
   inputView: {
     flexDirection: "row",
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   inputText: {
     fontSize: 20,
     paddingLeft: 20,
-    color: "#00ebb6"
+    color: "#FFC30F"
   },
   text: {
     fontSize: 20,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   updateBox: {
     width: width - 50,
-    backgroundColor: "white",
+    backgroundColor: "#581845",
     marginVertical: 25,
     borderRadius: 5,
     paddingVertical: 0,
