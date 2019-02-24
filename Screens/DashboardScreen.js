@@ -23,7 +23,18 @@ class DashboardScreen extends Component {
   static navigationOptions = {
     header: null
   };
-  constructor(props) {
+
+  user = firebase.auth().currentUser;
+
+  state = {
+      challenger: "",
+      challengeType: "",
+      challengeClockH: 1,
+      challengeClockM: 0,
+      challengeKey: ""
+  };
+
+        constructor(props) {
     super(props);
     this.state = {
       listViewData: data
@@ -86,7 +97,8 @@ class DashboardScreen extends Component {
                 }}
               >
                 <LinearGradient
-                  colors={["#ffb53b", "#ff9f00"]}
+
+                  colors={["#ffb53b", "#ffb53b"]}
                   style={{
                     padding: 20,
                     alignItems: "flex-start",
@@ -110,6 +122,53 @@ class DashboardScreen extends Component {
                       </Text>
                     </View>
                   </View>
+                    <TouchableOpacity
+                        style={{
+                            position: "absolute",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: 100,
+                            shadowOffset: { width: 0, height: 1 },
+                            shadowColor: "#00000",
+                            shadowOpacity: 0.7,
+                            right: 10,
+                            bottom: 15
+                        }}
+                        onPress={() => {
+                            this.setState({
+                                challenger: item.val().challenger,
+                                challengeType: item.val().challengeType,
+                                challengeClockH: item.val().timeHours,
+                                challengeClockM: item.val().timeMinutes,
+                                challengeKey: item.val().challengeKey
+                            }, function (){
+                                this.props.navigation.navigate("ClockScreens", {
+                                    challenger: this.state.challenger,
+                                    challengeType: this.state.challengeType,
+                                    challengeClockH: this.state.challengeClockH,
+                                    challengeClockM: this.state.challengeClockM,
+                                    challengeKey: this.state.challengeKey
+                                });
+                            });
+                        }}
+                    >
+                        <LinearGradient
+                            colors={["#dd0023", "#ffb53b"]}
+                            style={{
+                                padding: 15,
+                                borderRadius: 75,
+                                width: 50,
+                                height: 50,
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}
+                        >
+                            <Image
+                                source={require("../assets/flag.png")}
+                                style={{ width: 35, height: 35 }}
+                            />
+                        </LinearGradient>
+                    </TouchableOpacity>
                 </LinearGradient>
               </View>
             )}
@@ -131,7 +190,7 @@ class DashboardScreen extends Component {
             }
           >
             <LinearGradient
-              colors={["#dd0023", "#f83958"]}
+              colors={["#dd0023", "#dd0023"]}
               style={{
                 padding: 15,
                 borderRadius: 100,
