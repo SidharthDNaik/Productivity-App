@@ -27,14 +27,14 @@ class DashboardScreen extends Component {
   user = firebase.auth().currentUser;
 
   state = {
-      challenger: "",
-      challengeType: "",
-      challengeClockH: 1,
-      challengeClockM: 0,
-      challengeKey: ""
+    challenger: "",
+    challengeType: "",
+    challengeClockH: 1,
+    challengeClockM: 0,
+    challengeKey: ""
   };
 
-        constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       listViewData: data
@@ -97,7 +97,6 @@ class DashboardScreen extends Component {
                 }}
               >
                 <LinearGradient
-
                   colors={["#ffb53b", "#ffb53b"]}
                   style={{
                     padding: 20,
@@ -122,53 +121,57 @@ class DashboardScreen extends Component {
                       </Text>
                     </View>
                   </View>
-                    <TouchableOpacity
-                        style={{
-                            position: "absolute",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: 100,
-                            shadowOffset: { width: 0, height: 1 },
-                            shadowColor: "#00000",
-                            shadowOpacity: 0.7,
-                            right: 10,
-                            bottom: 15
-                        }}
-                        onPress={() => {
-                            this.setState({
-                                challenger: item.val().challenger,
-                                challengeType: item.val().challengeType,
-                                challengeClockH: item.val().timeHours,
-                                challengeClockM: item.val().timeMinutes,
-                                challengeKey: item.val().challengeKey
-                            }, function (){
-                                this.props.navigation.navigate("ClockScreens", {
-                                    challenger: this.state.challenger,
-                                    challengeType: this.state.challengeType,
-                                    challengeClockH: this.state.challengeClockH,
-                                    challengeClockM: this.state.challengeClockM,
-                                    challengeKey: this.state.challengeKey
-                                });
-                            });
-                        }}
+                  <TouchableOpacity
+                    style={{
+                      position: "absolute",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: 100,
+                      shadowOffset: { width: 0, height: 1 },
+                      shadowColor: "#00000",
+                      shadowOpacity: 0.7,
+                      right: 10,
+                      bottom: 15
+                    }}
+                    onPress={() => {
+                      this.setState(
+                        {
+                          challenger: item.val().challenger,
+                          challengeType: item.val().challengeType,
+                          challengeClockH: item.val().timeHours,
+                          challengeClockM: item.val().timeMinutes,
+                          challengeKey: item.val().challengeKey
+                        },
+                        function() {
+                          this.props.navigation.navigate("ClockScreens", {
+                            challenger: this.state.challenger,
+                            challengeType: this.state.challengeType,
+                            challengeClockH: this.state.challengeClockH,
+                            challengeClockM: this.state.challengeClockM,
+                            challengeKey: this.state.challengeKey,
+                            first_name: this.user.displayName
+                          });
+                        }
+                      );
+                    }}
+                  >
+                    <LinearGradient
+                      colors={["#dd0023", "#ffb53b"]}
+                      style={{
+                        padding: 15,
+                        borderRadius: 75,
+                        width: 50,
+                        height: 50,
+                        alignItems: "center",
+                        justifyContent: "center"
+                      }}
                     >
-                        <LinearGradient
-                            colors={["#dd0023", "#ffb53b"]}
-                            style={{
-                                padding: 15,
-                                borderRadius: 75,
-                                width: 50,
-                                height: 50,
-                                alignItems: "center",
-                                justifyContent: "center"
-                            }}
-                        >
-                            <Image
-                                source={require("../assets/flag.png")}
-                                style={{ width: 35, height: 35 }}
-                            />
-                        </LinearGradient>
-                    </TouchableOpacity>
+                      <Image
+                        source={require("../assets/flag.png")}
+                        style={{ width: 35, height: 35 }}
+                      />
+                    </LinearGradient>
+                  </TouchableOpacity>
                 </LinearGradient>
               </View>
             )}
