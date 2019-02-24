@@ -117,7 +117,8 @@ class DashboardScreen extends Component {
                       </Text>
                       <Text>
                         {item.val().challengeType} for {item.val().timeHours}{" "}
-                        hours and {item.val().timeMinutes} minutes
+                        hours {item.val().timeMinutes} minutes and{" "}
+                        {item.val().timeSeconds} seconds
                       </Text>
                     </View>
                   </View>
